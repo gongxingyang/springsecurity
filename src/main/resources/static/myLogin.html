@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script type="text/javascript" src="/js/jquery-3.4.1.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#loginBt").click(function(){
+                var uname = $("#username").val();
+                var pwd = $("#password").val();
+                $.ajax({
+                    url:"/login",
+                    type:"POST",
+                    data:{
+                        "username":uname,
+                        "password":pwd
+                    },
+                    dataType:"json",
+                    success:function(resp){
+                        alert("代码：" + resp.code+"  提示："+ resp.msg);
+                    }
+                })
+
+
+            })
+        })
+
+    </script>
+</head>
+<body>
+    <p>自定义ajax登录页面</p><br/>
+    <div >
+        用户名: <input type="text" id="username" value=""><br/>
+        密码: &nbsp; &nbsp;<input type="text" id="password" value=""><br/>
+        验证码:<input type="text" width="50" id="code" value=""> <img src="/captcha/code" alt="图片看不清？点击重新得到验证码"
+                                                                   id="imgCode"
+                                                                   onclick="this.src='/captcha/code?d='+new Date().getTime()"
+                                                                   style="cursor:pointer;border:0; display:inline;vertical-align:middle;"/><br/>
+       <button id="loginBt">登录</button>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 为根元素节点， 一个namespace对应一个dao -->
+<mapper namespace="com.taikang.dao.SysUserMapper">
+
+    <resultMap id="user" type="com.taikang.entity.SysUser">
+        <result column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="realname" property="realname"/>
+        <result column="isenable" property="isenable"/>
+        <result column="islock" property="islock"/>
+        <result column="isexpired" property="isexpired"/>
+        <result column="iscredentials" property="iscredentials"/>
+        <result column="createtime" property="createtime"/>
+        <result column="logintime" property="logintime"/>
+    </resultMap>
+    <insert id="insertUser" parameterType="com.taikang.entity.SysUser">
+      insert into sys_user(username,password,realname,isenable,islock,isexpired,iscredentials,createtime,logintime) values(
+      #{username},#{password},#{realname},#{isenable},
+      #{islock},#{isexpired},#{iscredentials},#{createtime},#{logintime}
+      )
+
+    </insert>
+    <select id="selectUserByuserName" resultMap="user">
+        select * from sys_user where username =#{username}
+    </select>
+
+</mapper>

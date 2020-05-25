@@ -1,0 +1,22 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- mapper 为根元素节点， 一个namespace对应一个dao -->
+<mapper namespace="com.taikang.dao.SysRoleMapper">
+
+    <resultMap id="role" type="com.taikang.entity.SysRole">
+        <result column="id" property="id"/>
+        <result column="rolename" property="rolename"/>
+        <result column="rolemome" property="rolemome"/>
+    </resultMap>
+    <insert id="insertRole" parameterType="com.taikang.entity.SysRole">
+        insert into sys_role(rolename,rolemome) values(#{rolename},#{rolemome})
+    </insert>
+
+    <select id="findRoleByUserId" resultMap="role">
+        select sr.id,sr.rolename,sr.rolemome
+        from sys_role sr
+        left join sys_user_role sur on sr.id = sur.roleid
+        where sur.userid = #{userId}
+    </select>
+</mapper>
